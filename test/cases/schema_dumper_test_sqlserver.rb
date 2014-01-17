@@ -1,5 +1,7 @@
 require 'cases/sqlserver_helper'
+require 'cases/schema_dumper_test'
 require 'stringio'
+
 
 class SchemaDumperTestSqlserver < ActiveRecord::TestCase
   
@@ -81,16 +83,7 @@ class SchemaDumperTest < ActiveRecord::TestCase
     output = standard_dump
     assert_match %r{t.decimal\s+"atoms_in_universe",\s+precision: 38,\s+scale: 0}, output
   end
-  
-  private
-  
-  def standard_dump
-    stream = StringIO.new
-    ActiveRecord::SchemaDumper.ignore_tables = []
-    ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, stream)
-    stream.string
-  end
-  
+
 end
 
 
